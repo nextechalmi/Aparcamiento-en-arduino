@@ -56,3 +56,23 @@ void loop() {
 ## Comprobación de la distancia
 
 El siguiente bloque de código compara la distancia medida con un valor umbral de 12 centímetros. Si la distancia es menor o igual a 12 centímetros, se asume que hay un objeto cerca y se enciende el LED rojo mientras se apaga el LED verde para indicar que el estacionamiento está ocupado. Si la distancia es mayor a 12 centímetros, se enciende el LED verde y se apaga el LED rojo para indicar que el estacionamiento está libre.
+
+```c
+ // Comprobación de la distancia medida
+  if (d <= 12) {  // Si la distancia es menor o igual a 12cm
+    Serial.println("Aparcao");  // Envío de un mensaje por comunicación serial
+    digitalWrite(ledR, HIGH);  // Apagado del LED verde
+    digitalWrite(ledV, LOW);   // Encendido del LED rojo
+  } else {        // Si la distancia es mayor a 12cm
+    Serial.println("Libre");    // Envío de un mensaje por comunicación serial
+    digitalWrite(ledR, LOW);   // Encendido del LED verde
+    digitalWrite(ledV, HIGH);  // Apagado del LED rojo
+  }
+  
+  // Pausa de 100ms antes de la siguiente lectura
+  delay(100);
+}
+```
+Después de la comprobación de la distancia, el código establece el estado de los LED en función de la distancia medida. Si la distancia es menor o igual a 12 centímetros, se establece el LED rojo en estado alto y el LED verde en estado bajo, indicando que el espacio de estacionamiento está ocupado. En cambio, si la distancia es mayor a 12 centímetros, se establece el LED rojo en estado bajo y el LED verde en estado alto, lo que indica que el espacio de estacionamiento está libre.
+
+Por último, el código agrega una pausa de 100 milisegundos antes de comenzar la siguiente lectura del sensor. Este retraso es necesario para permitir que los pulsos ultrasónicos emitidos por el sensor se disipen antes de realizar una nueva lectura.
